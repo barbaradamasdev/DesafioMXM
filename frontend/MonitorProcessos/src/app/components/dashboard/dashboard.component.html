@@ -1,46 +1,55 @@
 <section class="container">
 
+  <div *ngIf="dataUpdate" class="grid">
 
-  <div *ngIf="data">
+    <div class="card">
+      <h1>Memória</h1>
+      <ng-container *ngIf="dataUpdate.memoria">
+        <p>Memória comprometida (GB): {{ dataUpdate.memoria.committedMemoryGB | number:'1.2-2' }} GB</p>
+        <p>Memória livre (GB): {{ dataUpdate.memoria.availableMemoryGB | number:'1.2-2' }} GB</p>
+        <p>Memória total (GB): {{ dataUpdate.memoria.totalMemoryGB | number:'1.2-2' }} GB</p>
+        <p>Uso de memória (%): {{ dataUpdate.memoria.memoryUsagePercent | number:'1.2-2' }}%</p>
+      </ng-container>
 
-    <!-- Exibindo informações de memória -->
-    <h2>Memória</h2>
-    <ng-container *ngIf="data.memoria">
-      <p>Memória total (GB): {{ data.memoria.totalMemoryGB | number:'1.2-2'  }} GB</p>
-      <p>Memória comprometida (GB): {{ data.memoria.committedMemoryGB | number:'1.2-2'  }} GB</p>
-      <p>Uso de memória (%): {{ data.memoria.memoryUsagePercent | number:'1.2-2'  }}%</p>
-    </ng-container>
-
-    <!-- Exibindo informações da CPU -->
-    <h2>CPU</h2>
-    <ng-container *ngIf="data.cpu">
-      <p>Nome do usuário: {{ data.cpu.userName }}</p>
-      <p>Nome da máquina: {{ data.cpu.machineName }}</p>
-      <p>Número de processadores: {{ data.cpu.processorCount }}</p>
-      <p>Uso de CPU (%): {{ data.cpu.percentUsed | number:'1.2-2'  }}%</p>
-    </ng-container>
-
-    <!-- Exibindo informações de processos -->
-    <h2>Processos</h2>
-    <div class="table-responsive"> <!-- Adicionando classe "table-responsive" para tornar a tabela responsiva -->
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>ID</th>
-            <th>Memória</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let processo of data.processos">
-            <td>{{ processo?.nome }}</td>
-            <td>{{ processo?.id }}</td>
-            <td style="text-align: right;">{{ processo?.memoriaPagedKB }} KB</td>
-          </tr>
-        </tbody>
-      </table>
+      <div *ngIf="pieChart">
+        <div class="pie" [chart]="pieChart"></div>
+      </div>
     </div>
 
+    <div class="card">
+      <h1>CPU</h1>
+      <ng-container *ngIf="dataUpdate.cpu">
+        <p>Nome do usuário: {{ dataUpdate.cpu.userName }}</p>
+        <!-- <p>Nome da máquina: {{ dataUpdate.cpu.machineName }}</p> -->
+        <p>Número de processadores: {{ dataUpdate.cpu.processorCount }}</p>
+        <p>Uso de CPU (%): {{ dataUpdate.cpu.percentUsed | number:'1.2-2'  }}%</p>
+      </ng-container>
+
+      <div class="line" [chart]="lineChart"></div>
+      <!-- <p>criar scroll no grafico linha</p> -->
+    </div>
+
+    <div class="card">
+      <h1>Processos</h1>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>ID</th>
+              <th>Memória</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let processo of dataUpdate.processos">
+              <td>{{ processo?.nome }}</td>
+              <td>{{ processo?.id }}</td>
+              <td style="text-align: right;">{{ processo?.memoriaPagedKB }} KB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
 </section>

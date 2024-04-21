@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CardComponent } from "./components/card/card.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 
 @Component({
@@ -8,7 +7,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, CardComponent, SidebarComponent]
+    imports: [RouterOutlet, SidebarComponent]
 })
 export class AppComponent {
   title = 'MonitorProcessos';
