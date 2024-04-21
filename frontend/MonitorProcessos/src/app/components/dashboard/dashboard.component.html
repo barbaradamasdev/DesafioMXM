@@ -1,0 +1,46 @@
+<section class="container">
+
+
+  <div *ngIf="data">
+
+    <!-- Exibindo informações de memória -->
+    <h2>Memória</h2>
+    <ng-container *ngIf="data.memoria">
+      <p>Memória total (GB): {{ data.memoria.totalMemoryGB | number:'1.2-2'  }} GB</p>
+      <p>Memória comprometida (GB): {{ data.memoria.committedMemoryGB | number:'1.2-2'  }} GB</p>
+      <p>Uso de memória (%): {{ data.memoria.memoryUsagePercent | number:'1.2-2'  }}%</p>
+    </ng-container>
+
+    <!-- Exibindo informações da CPU -->
+    <h2>CPU</h2>
+    <ng-container *ngIf="data.cpu">
+      <p>Nome do usuário: {{ data.cpu.userName }}</p>
+      <p>Nome da máquina: {{ data.cpu.machineName }}</p>
+      <p>Número de processadores: {{ data.cpu.processorCount }}</p>
+      <p>Uso de CPU (%): {{ data.cpu.percentUsed | number:'1.2-2'  }}%</p>
+    </ng-container>
+
+    <!-- Exibindo informações de processos -->
+    <h2>Processos</h2>
+    <div class="table-responsive"> <!-- Adicionando classe "table-responsive" para tornar a tabela responsiva -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>ID</th>
+            <th>Memória</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let processo of data.processos">
+            <td>{{ processo?.nome }}</td>
+            <td>{{ processo?.id }}</td>
+            <td style="text-align: right;">{{ processo?.memoriaPagedKB }} KB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</section>
