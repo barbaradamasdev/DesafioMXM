@@ -1,0 +1,19 @@
+<div>
+  <h1>Processos</h1>
+  <div class="table-responsive">
+    <table class="table table-striped" matSort (matSortChange)="sortData($event.active)">
+      <thead>
+        <tr>
+          <th mat-sort-header="nome" (click)="sortData('nome')">Nome</th>  <th mat-sort-header="id" (click)="sortData('id')">ID</th>  <th mat-sort-header="memoriaPagedKB">Memória</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let processo of dataSource.data">
+          <td>{{ processo?.nome }}</td>
+          <td>{{ processo?.id }}</td>
+          <td style="text-align: right;">{{ processo?.memoriaPagedKB }} KB</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

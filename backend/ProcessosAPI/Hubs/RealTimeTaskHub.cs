@@ -1,26 +1,14 @@
-//TODO somente para funcionar swagger
 using System.Diagnostics;
 using System.Management;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using ProcessosAPI.DTOS;
 
-namespace ProcessosAPI.Controllers;
-
-[ApiController]
-[Route("api/[controller]")]
-public class ProcessosController : ControllerBase
+public class RealTimeTaskHub : Hub
 {
-    private readonly IHubContext<RealTimeTaskHub> _hubContext;
-
-    public ProcessosController(IHubContext<RealTimeTaskHub> hubContext)
+    public override async Task OnConnectedAsync()
     {
-        _hubContext = hubContext;
-    }
+        Console.WriteLine($"Client connected: {Context.ConnectionId}");
 
-    [HttpGet]
-    public async Task<IActionResult> GetProcessInfo()
-    {
         while (true)
         {
             var processos = GetProcessesInfo().Select(p => new ProcessInfoDto
@@ -29,7 +17,7 @@ public class ProcessosController : ControllerBase
                 Id = p.Id,
                 MemoriaPagedKB = p.PagedMemorySize64 / 1024
             }).ToList();
-            
+
             ulong totalMemoryBytes = GetTotalMemory();
             float totalMemoryGB = totalMemoryBytes / (1024f * 1024f * 1024f);
 
@@ -70,8 +58,11 @@ public class ProcessosController : ControllerBase
                 CPU = cpu
             };
 
-            await _hubContext.Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
-            await Task.Delay(500);
+            
+
+            await Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
+            //TODO mudar tempo apos finalizar layout
+            await Task.Delay(150000);
         }
     }
 
@@ -79,6 +70,7 @@ public class ProcessosController : ControllerBase
     {
         return Process.GetProcesses();
     }
+
     private ulong GetTotalMemory()
     {
         ManagementObjectSearcher searcher = new("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");

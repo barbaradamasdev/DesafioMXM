@@ -5,10 +5,10 @@
     <div class="card">
       <h1>Memória</h1>
       <ng-container *ngIf="dataUpdate.memoria">
-        <p>Memória comprometida (GB): {{ dataUpdate.memoria.committedMemoryGB | number:'1.2-2' }} GB</p>
-        <p>Memória livre (GB): {{ dataUpdate.memoria.availableMemoryGB | number:'1.2-2' }} GB</p>
-        <p>Memória total (GB): {{ dataUpdate.memoria.totalMemoryGB | number:'1.2-2' }} GB</p>
-        <p>Uso de memória (%): {{ dataUpdate.memoria.memoryUsagePercent | number:'1.2-2' }}%</p>
+        <p><strong>Memória comprometida (GB):</strong> {{ dataUpdate.memoria.committedMemoryGB | number:'1.2-2' }} GB</p>
+        <p><strong>Memória livre (GB):</strong> {{ dataUpdate.memoria.availableMemoryGB | number:'1.2-2' }} GB</p>
+        <p><strong>Memória total (GB):</strong> {{ dataUpdate.memoria.totalMemoryGB | number:'1.2-2' }} GB</p>
+        <p><strong>Uso de memória (%):</strong> {{ dataUpdate.memoria.memoryUsagePercent | number:'1.2-2' }}%</p>
       </ng-container>
 
       <div *ngIf="pieChart">
@@ -19,37 +19,17 @@
     <div class="card">
       <h1>CPU</h1>
       <ng-container *ngIf="dataUpdate.cpu">
-        <p>Nome do usuário: {{ dataUpdate.cpu.userName }}</p>
-        <!-- <p>Nome da máquina: {{ dataUpdate.cpu.machineName }}</p> -->
-        <p>Número de processadores: {{ dataUpdate.cpu.processorCount }}</p>
-        <p>Uso de CPU (%): {{ dataUpdate.cpu.percentUsed | number:'1.2-2'  }}%</p>
+        <p><strong>Nome do usuário:</strong>  {{ dataUpdate.cpu.userName }}</p>
+        <p><strong>Nome da máquina:</strong>  {{ dataUpdate.cpu.machineName }}</p>
+        <p><strong>Número de processadores:</strong>  {{ dataUpdate.cpu.processorCount }}</p>
+        <p><strong>Uso de CPU (%):</strong>  {{ dataUpdate.cpu.percentUsed | number:'1.2-2'  }}%</p>
       </ng-container>
 
       <div class="line" [chart]="lineChart"></div>
       <!-- <p>criar scroll no grafico linha</p> -->
     </div>
 
-    <div class="card">
-      <h1>Processos</h1>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>ID</th>
-              <th>Memória</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let processo of dataUpdate.processos">
-              <td>{{ processo?.nome }}</td>
-              <td>{{ processo?.id }}</td>
-              <td style="text-align: right;">{{ processo?.memoriaPagedKB }} KB</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <app-process-list class="card" [processos]="dataUpdate ? dataUpdate.processos : null"></app-process-list>
   </div>
 
 </section>

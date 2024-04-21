@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{7D5EF95F-546B-4045-B253-AB3F1B3035DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessosAPI", "backend\ProcessosAPI\ProcessosAPI.csproj", "{8860C9F3-679C-4B25-A1C3-E605158CAD74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8860C9F3-679C-4B25-A1C3-E605158CAD74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8860C9F3-679C-4B25-A1C3-E605158CAD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8860C9F3-679C-4B25-A1C3-E605158CAD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8860C9F3-679C-4B25-A1C3-E605158CAD74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8860C9F3-679C-4B25-A1C3-E605158CAD74} = {7D5EF95F-546B-4045-B253-AB3F1B3035DA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {960E6C8E-F762-4AFD-9E78-1F923BC9D603}
+	EndGlobalSection
+EndGlobal

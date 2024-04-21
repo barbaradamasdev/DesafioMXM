@@ -4,13 +4,14 @@ import { SignalRService } from '../../services/signal-r.service';
 import { CommonModule } from '@angular/common';
 import { ChartModule } from 'angular-highcharts';
 import { Chart } from 'angular-highcharts';
+import { ProcessListComponent } from "../process-list/process-list.component";
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [CommonModule, ChartModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    selector: 'app-dashboard',
+    standalone: true,
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css',
+    imports: [CommonModule, ChartModule, ProcessListComponent]
 })
 export class DashboardComponent {
   dataUpdate: ProcessInfoData | null = null;
