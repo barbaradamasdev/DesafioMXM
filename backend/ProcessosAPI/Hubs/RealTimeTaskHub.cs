@@ -18,30 +18,41 @@ public class RealTimeTaskHub : Hub
                 MemoriaPagedKB = p.PagedMemorySize64 / 1024
             }).ToList();
 
-            ulong totalMemoryBytes = GetTotalMemory();
-            float totalMemoryGB = totalMemoryBytes / (1024f * 1024f * 1024f);
+            float totalMemory = 0f;
+            float availableMemory = 0f;
+            float usedMemory = 0f;
 
-            PerformanceCounter availableMemoryCounter = new PerformanceCounter("Memory", "Available Bytes");
-            float availableMemoryBytes = availableMemoryCounter.NextValue();
-            float availableMemoryGB = availableMemoryBytes / (1024f * 1024f * 1024f);
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+            foreach (ManagementObject queryObj in searcher.Get())
+            {
+                ulong totalPhysicalMemory = Convert.ToUInt64(queryObj["TotalVisibleMemorySize"]);
+                ulong freePhysicalMemory = Convert.ToUInt64(queryObj["FreePhysicalMemory"]);
+                ulong usedPhysicalMemory = totalPhysicalMemory - freePhysicalMemory;
 
-            PerformanceCounter usedMemoryCounter = new PerformanceCounter("Memory", "Committed Bytes");
-            float committedMemoryBytes = usedMemoryCounter.NextValue();
-            float committedMemoryGB = committedMemoryBytes / (1024f * 1024f * 1024f);
+                float totalMemoryBytes = totalPhysicalMemory;
+                float availableMemoryBytes = freePhysicalMemory;
+                float usedMemoryBytes = usedPhysicalMemory;
 
-            PerformanceCounter memoryUsageCounter = new("Memory", "% Committed Bytes In Use");
-            float memoryUsagePercent = memoryUsageCounter.NextValue();
+                totalMemory = totalMemoryBytes / (1024f * 1024f);
+                availableMemory = availableMemoryBytes / (1024f * 1024f);
+                usedMemory = usedMemoryBytes / (1024f * 1024f);
+            }
 
             var memoria = new MemoryInfoDto
             {
-                CommittedMemoryGB = committedMemoryGB,
-                AvailableMemoryGB = availableMemoryGB,
-                TotalMemoryGB = totalMemoryGB,
-                MemoryUsagePercent = memoryUsagePercent
+                UsedMemoryGB = usedMemory,
+                AvailableMemoryGB = availableMemory,
+                TotalMemoryGB = totalMemory,
             };
 
-            PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
-            float cpuUsage = cpuCounter.NextValue();
+            // PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
+            // float cpuUsage = cpuCounter.NextValue();
+
+             PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
+             Thread.Sleep(500);
+             float cpuUsage = cpuCounter.NextValue();
+             Thread.Sleep(500);
+             cpuUsage = cpuCounter.NextValue();
 
             var cpu = new CPUInfoDto
             {
@@ -58,26 +69,13 @@ public class RealTimeTaskHub : Hub
                 CPU = cpu
             };
 
-            
-
             await Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
-            //TODO mudar tempo apos finalizar layout
-            await Task.Delay(150000);
+            await Task.Delay(5500); //TODO reduzir tempo apos layout
         }
     }
 
     private Process[] GetProcessesInfo()
     {
         return Process.GetProcesses();
-    }
-
-    private ulong GetTotalMemory()
-    {
-        ManagementObjectSearcher searcher = new("SELECT TotalPhysicalMemory FROM Win32_ComputerSystem");
-        foreach (ManagementObject queryObj in searcher.Get())
-        {
-            return Convert.ToUInt64(queryObj["TotalPhysicalMemory"]);
-        }
-        return 0;
     }
 }

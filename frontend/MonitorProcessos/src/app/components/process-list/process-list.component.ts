@@ -53,6 +53,7 @@ export class ProcessListComponent implements OnInit, AfterViewInit {
 
     this.dataSource.data = data;
   }
+
 }
 
 function compare(a: any, b: any, isAsc: boolean) {

@@ -13,8 +13,7 @@ export interface Processo {
 export interface Memoria {
   totalMemoryGB: number;
   availableMemoryGB: number;
-  committedMemoryGB: number;
-  memoryUsagePercent: number;
+  usedMemoryGB: number;
 }
 
 export interface CPU {

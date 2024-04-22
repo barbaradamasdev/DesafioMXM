@@ -2,33 +2,8 @@
 
   <div *ngIf="dataUpdate" class="grid">
 
-    <div class="card">
-      <h1>Memória</h1>
-      <ng-container *ngIf="dataUpdate.memoria">
-        <p><strong>Memória comprometida (GB):</strong> {{ dataUpdate.memoria.committedMemoryGB | number:'1.2-2' }} GB</p>
-        <p><strong>Memória livre (GB):</strong> {{ dataUpdate.memoria.availableMemoryGB | number:'1.2-2' }} GB</p>
-        <p><strong>Memória total (GB):</strong> {{ dataUpdate.memoria.totalMemoryGB | number:'1.2-2' }} GB</p>
-        <p><strong>Uso de memória (%):</strong> {{ dataUpdate.memoria.memoryUsagePercent | number:'1.2-2' }}%</p>
-      </ng-container>
-
-      <div *ngIf="pieChart">
-        <div class="pie" [chart]="pieChart"></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h1>CPU</h1>
-      <ng-container *ngIf="dataUpdate.cpu">
-        <p><strong>Nome do usuário:</strong>  {{ dataUpdate.cpu.userName }}</p>
-        <p><strong>Nome da máquina:</strong>  {{ dataUpdate.cpu.machineName }}</p>
-        <p><strong>Número de processadores:</strong>  {{ dataUpdate.cpu.processorCount }}</p>
-        <p><strong>Uso de CPU (%):</strong>  {{ dataUpdate.cpu.percentUsed | number:'1.2-2'  }}%</p>
-      </ng-container>
-
-      <div class="line" [chart]="lineChart"></div>
-      <!-- <p>criar scroll no grafico linha</p> -->
-    </div>
-
+    <app-memory-card class="card" [processos]="dataUpdate ? dataUpdate.memoria : null"></app-memory-card>
+    <app-cpu-card class="card" [processos]="dataUpdate ? dataUpdate.cpu : null"></app-cpu-card>
     <app-process-list class="card" [processos]="dataUpdate ? dataUpdate.processos : null"></app-process-list>
   </div>
 

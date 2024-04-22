@@ -20,6 +20,33 @@
   --bg-light: white;
 }
 
+h1 {
+  font-size: 24px !important;
+  color: var(--clr-dark) !important;
+  font-weight: 700 !important;
+  margin-bottom: 15px !important;
+}
+
+.card {
+  border-radius: 15px;
+  padding: 20px;
+  border: none;
+  box-shadow: 1px 1px 8px rgba(67, 67, 67, 0.166);
+}
+
+.charts{
+  display: flex;
+  margin: 20px;
+}
+
+.pie{
+  flex: 1;
+  margin-right: 20px;
+}
+
+.line{
+  flex: 1;
+}
 
 ::-webkit-scrollbar {
   width: 15px;
