@@ -1,6 +1,15 @@
-h1 {
-  font-size: 24px;
-  color: var(--clr-dark);
-  font-weight: 700;
-  margin-bottom: 15px;
+.table-responsive {
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+@media (max-width: 750px) {
+  .table>:not(caption)>*>* {
+    padding: .2rem .2rem !important;
+  }
+
+  th:first-child,
+  td:first-child {
+    max-width: 120px;
+  }
 }

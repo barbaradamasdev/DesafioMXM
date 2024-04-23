@@ -47,14 +47,12 @@ export class DiskCardComponent implements OnInit, OnChanges  {
     data.addColumn('number', 'Slices');
     data.addRows([
       ['Livre', this.diskLivrePercent],
-      ['Utilizada', this.diskUtilizadaPercent],
+      ['Ocupada', this.diskUtilizadaPercent],
     ]);
 
     var options = {
       'is3D': true,
       'colors': ['#140431', '#720cdb'],
-      'width': 500,
-      'height': 500
     };
 
     var chart = new google.visualization.PieChart(document.getElementById(`disk-chart`));

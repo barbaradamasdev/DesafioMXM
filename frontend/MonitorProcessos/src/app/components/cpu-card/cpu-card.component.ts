@@ -21,8 +21,7 @@ export class CpuCardComponent implements OnInit  {
     this.options = {
       curveType: 'function',
       legend: { position: 'bottom' },
-      width: 900,
-      height: 500
+      colors: ['#720cdb'],
     };
   }
 
@@ -46,8 +45,19 @@ export class CpuCardComponent implements OnInit  {
       const options = {
         curveType: 'function',
         legend: { position: 'bottom' },
-        // width: 200,
-        height: 200
+        colors: ['#720cdb'],
+        series: {
+          // Gives each series an axis name that matches the Y-axis below.
+          0: {axis: 'Temps'},
+          1: {axis: 'Daylight'}
+        },
+        axes: {
+          // Adds labels to each axis; they don't have to match the axis names.
+          y: {
+            Temps: {label: 'Temps (Celsius)'},
+            Daylight: {label: 'Daylight'}
+          }
+        }
       };
 
       const chart = new google.visualization.LineChart(document.getElementById('curve-chart'));

@@ -1,0 +1,13 @@
+.chart {
+  max-width: 100%;
+  width: 370px;
+  overflow: hidden;
+  height: 320px;
+}
+
+#pie-chart {
+  margin-top: -70px;
+  margin-left: -80px;
+  width: 600px;
+  height: 500px;
+}

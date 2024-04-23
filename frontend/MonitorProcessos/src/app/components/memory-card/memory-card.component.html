@@ -1,11 +1,19 @@
   <div>
     <h1>Memória</h1>
-    <ng-container *ngIf="processos">
-      <p><strong>Memória em uso (GB):</strong> {{ processos.usedMemoryGB | number:'1.2-2' }} GB</p>
-      <p><strong>Memória livre (GB):</strong> {{ processos.availableMemoryGB | number:'1.2-2' }} GB</p>
-      <p><strong>Memória total (GB):</strong> {{ processos.totalMemoryGB | number:'1.2-2' }} GB</p>
-      <p><strong>Uso de memória (%):</strong> {{ (processos.usedMemoryGB / processos.totalMemoryGB * 100) | number:'1.2-2' }}%</p>
-    </ng-container>
-  </div>
+    <div class="wrapper small-card">
 
-  <div id="pie-chart"></div>
+      <div>
+        <ng-container *ngIf="processos">
+          <p><strong>Memória em uso (GB):</strong> {{ processos.usedMemoryGB | number:'1.2-2' }} GB</p>
+          <p><strong>Memória livre (GB):</strong> {{ processos.availableMemoryGB | number:'1.2-2' }} GB</p>
+          <p><strong>Memória total (GB):</strong> {{ processos.totalMemoryGB | number:'1.2-2' }} GB</p>
+          <p><strong>Uso de memória (%):</strong> {{ (processos.usedMemoryGB / processos.totalMemoryGB * 100) | number:'1.2-2' }}%</p>
+        </ng-container>
+      </div>
+
+      <div class="chart">
+        <div id="pie-chart"></div>
+      </div>
+    </div>
+</div>
+

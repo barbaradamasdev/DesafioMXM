@@ -3,20 +3,24 @@
   <ng-container *ngIf="processos">
 
     <div *ngIf="processos.drives && processos.drives.length > 0; else noDrives">
-      <div *ngFor="let disk of processos.drives; let i = index">
-        <p><strong>Drives encontrados:</strong></p>
-        <div class="flex" style="flex-direction: column;">
-          <button (click)="selectDrive(i)">{{disk.driveName}}</button>
+      <div class="wrapper small-card" *ngFor="let disk of processos.drives; let i = index">
+        <div>
+          <p><strong>Drives encontrados:</strong></p>
+          <div class="flex" style="flex-direction: column;">
+            <button (click)="selectDrive(i)">{{disk.driveName}}</button>
+          </div>
+
+          <p><strong>Informações do drive selecionado:</strong></p>
+          <p><strong>Nome do drive:</strong> {{ disk.driveName }}</p>
+          <p><strong>Tipo de drive:</strong> {{ getDriveTypeName(disk.driveType) }}</p>
+          <p><strong>Tamanho total:</strong> {{ (disk.totalSize / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
+          <p><strong>Espaço livre disponível:</strong> {{ (disk.availableFreeSpace / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
+          <p><strong>Espaço utilizado:</strong> {{ (disk.usedSpace / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
         </div>
 
-        <p><strong>Informações do drive selecionado:</strong></p>
-        <p><strong>Nome do drive:</strong> {{ disk.driveName }}</p>
-        <p><strong>Tipo de drive:</strong> {{ getDriveTypeName(disk.driveType) }}</p>
-        <p><strong>Tamanho total:</strong> {{ (disk.totalSize / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
-        <p><strong>Espaço livre disponível:</strong> {{ (disk.availableFreeSpace / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
-        <p><strong>Espaço utilizado:</strong> {{ (disk.usedSpace / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
-
-        <div id="disk-chart"></div>
+        <div class="chart">
+          <div id="disk-chart"></div>
+        </div>
       </div>
     </div>
 

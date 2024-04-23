@@ -36,15 +36,22 @@ h1 {
 }
 
 h1, h2, h3 {
-  font-family: "Jersey 20", sans-serif;
+  font-family: "Jersey 20", sans-serif !important;
 }
+
+h1 {
+  font-size: 30px !important;
+  color: var(--clr-dark);
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
 
 .card {
   border-radius: 15px;
-  padding: 20px;
+  padding: 25px;
   border: none;
   box-shadow: 1px 1px 8px rgba(67, 67, 67, 0.166);
-  min-width: 550px;
 }
 
 .charts{
@@ -85,10 +92,6 @@ h1, h2, h3 {
   background-color: #888;
 }
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 button {
   max-width: 150px;
   border-radius: 15px;
@@ -113,4 +116,45 @@ a {
 
 a:hover {
   color: #e3d0f5;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+@media (max-width: 718px) {
+  .wrapper {
+    flex-direction: column !important;
+  }
+
+  #curve-chart {
+    margin-top: -60px !important;
+    margin-left: -50px !important;
+    width: 100vw !important;
+  }
+
+}
+
+@media (min-width: 719px) and (max-width: 915px) {
+  .wrapper.small-card {
+    flex-direction: row !important;
+  }
+  .wrapper.big-card {
+    flex-direction: column !important;
+  }
+}
+
+@media (min-width: 916px) and (max-width: 1280px) {
+  .wrapper.small-card {
+    flex-direction: column !important;
+  }
+}
+
+@media (max-width: 460px) {
+  #disk-chart, #pie-chart {
+    margin-left: -90px !important;
+    width: 500px !important;
+  }
 }

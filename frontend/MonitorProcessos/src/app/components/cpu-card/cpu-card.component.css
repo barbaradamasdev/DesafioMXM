@@ -1,0 +1,26 @@
+.chart {
+  max-width: 100%;
+  overflow: hidden;
+  width: 600px;
+  height: 450px;
+}
+
+#curve-chart {
+  margin-top: -70px;
+  margin-left: -80px;
+  width: 800px;
+  height: 500px;
+}
+
+@media (min-width: 1200px) {
+  .chart {
+    width: 1000px;
+    max-width: 75vw;
+  }
+
+  #curve-chart {
+    margin-top: -50px;
+    width: 1200px;
+    max-width: 90vw;
+  }
+}
