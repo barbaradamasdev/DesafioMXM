@@ -1,121 +1,60 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ProcessInfoData } from '../../models/ProcessInfoData';
-import { ChartModule } from 'angular-highcharts';
-import * as Highcharts from 'highcharts';
-import { HighchartsChartModule } from 'highcharts-angular';
+import { GoogleChartsModule } from 'angular-google-charts';
+
+declare var google:any;
 
 @Component({
   selector: 'app-memory-card',
   standalone: true,
-  imports: [CommonModule, ChartModule, HighchartsChartModule],
+  imports: [CommonModule, GoogleChartsModule],
   templateUrl: './memory-card.component.html',
   styleUrl: './memory-card.component.css'
 })
-export class MemoryCardComponent {
+export class MemoryCardComponent implements OnInit, OnChanges  {
   @Input() processos: ProcessInfoData['memoria'] | null = null;
+  memoriaLivrePercent: number = 0;
+  memoriaUtilizadaPercent: number = 0;
 
-  
+  constructor(){}
+
+  ngOnInit(): void {
+    this.updateChart();
+  }
+
+  ngOnChanges(): void {
+    this.updateChart();
+  }
+
+  updateChart(): void {
+    if (this.processos) {
+      this.memoriaLivrePercent = (this.processos.availableMemoryGB / this.processos.totalMemoryGB) * 100;
+      this.memoriaUtilizadaPercent = (this.processos.usedMemoryGB / this.processos.totalMemoryGB) * 100;
+
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(this.drawChart.bind(this));
+    }
+  }
+
+  drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+      ['Livre', this.memoriaLivrePercent],
+      ['Utilizada', this.memoriaUtilizadaPercent],
+    ]);
+
+    var options = {
+      'pieHole':0.4,
+      'colors': ['#140431', '#720cdb'],
+      'width':600,
+      'height':500
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+    chart.draw(data, options);
+  }
+
 }
-
-//   // ngOnChanges(changes: import('@angular/core').SimpleChanges) {
-//   ngOnChanges(): void {
-//     if (this.processos) {
-//       this.updateChart();
-//     }
-//   }
-
-
-//   Highcharts: typeof Highcharts = Highcharts;
-//   updateFlag: boolean = true; // optional boolean
-//   oneToOneFlag: boolean = true; // optional boolean, defaults to false
-//   chartOptions: Highcharts.Options = {
-//     series: [{
-//       data: [
-//         ['Livre', this.processos?.availableMemoryGB],
-//         ['Ocupado', this.processos?.usedMemoryGB]
-//       ],
-//       type: 'pie'
-//     }]
-//   };
-
-//   ngOnInit(): void {
-//     this.updateChart();
-//   }
-
-//   ngAfterViewInit(): void {
-//     this.chart = Highcharts.chart(this.elementRef.nativeElement.querySelector('#container'), {
-//       title: {
-//         text: 'Uso de Memória'
-//       },
-//       series: [{
-//         type: 'pie',
-//         data: []
-//       }]
-//     });
-//   }
-
-//   updateChart() {
-//     if (!this.processos) {
-//       return;
-//     }
-
-//     const data = [
-//       ['Livre', this.processos?.availableMemoryGB],
-//       ['Ocupado', this.processos?.usedMemoryGB]
-//     ];
-
-//     this.chart.update({
-//       series: [{
-//         type: 'column',
-//         colorByPoint: true,
-//         data: data,
-//         showInLegend: false
-//       }]
-//     });
-
-//     this.chart = Highcharts.chart(this.elementRef.nativeElement.querySelector('#container'), {
-//       title: {
-//         text: 'Uso de Memória'
-//       },
-//       series: [{
-//         type: 'pie',
-//         data: []
-//       }]
-//     });
-
-//     // console.log('atualizou metodo')
-//     // const dataMemory = {
-//     //   totalMemoryGB: this.processos?.totalMemoryGB,
-//     //   usedMemoryGB: this.processos?.usedMemoryGB,
-//     //   availableMemoryGB: this.processos?.availableMemoryGB
-//     // };
-
-
-//   }
-// }
-
-// pieChart = new Chart({
-  //   chart: {
-  //     type: 'pie',
-  //     plotShadow: false
-  //   },
-  //   credits: {
-  //     enabled: false
-  //   },
-  //   legend: {
-  //     enabled: false
-  //   },
-  //   series: [{
-  //     type: 'pie',
-  //     data: [{
-  //       name: 'Utilizado',
-  //       y: 1,
-  //       color: 'var(--clr-medium)'
-  //     }, {
-  //       name: 'Livre',
-  //       y: 1,
-  //       color: 'var(--clr-light)'
-  //     }]
-  //   }]
-  // });

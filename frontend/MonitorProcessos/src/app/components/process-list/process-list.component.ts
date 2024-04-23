@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ProcessListComponent implements OnInit, AfterViewInit {
 
-  @Input() processos: ProcessInfoData['processos'] | null = null;
+  @Input() processos: ProcessInfoData | null = null;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
 
@@ -21,7 +21,7 @@ export class ProcessListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if (this.processos) {
-      this.dataSource.data = this.processos;
+      this.dataSource.data = this.processos.processos;
     }
   }
 
@@ -41,6 +41,8 @@ export class ProcessListComponent implements OnInit, AfterViewInit {
       const isAsc = sortDirection === 'asc';
       switch (sortField) {
         case 'nome':
+          return compare(a.nome, b.nome, isAsc);
+        case 'state':
           return compare(a.nome, b.nome, isAsc);
         case 'id':
           return compare(a.id, b.id, isAsc);

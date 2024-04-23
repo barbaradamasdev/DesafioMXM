@@ -1,28 +1,11 @@
-  <h1>Memória</h1>
-  <ng-container *ngIf="processos">
-    <p><strong>Memória em uso (GB):</strong> {{ processos.usedMemoryGB | number:'1.2-2' }} GB</p>
-    <p><strong>Memória livre (GB):</strong> {{ processos.availableMemoryGB | number:'1.2-2' }} GB</p>
-    <p><strong>Memória total (GB):</strong> {{ processos.totalMemoryGB | number:'1.2-2' }} GB</p>
-    <p><strong>Uso de memória (%):</strong> {{ (processos.usedMemoryGB / processos.totalMemoryGB * 100) | number:'1.2-2' }}%</p>
-  </ng-container>
+  <div>
+    <h1>Memória</h1>
+    <ng-container *ngIf="processos">
+      <p><strong>Memória em uso (GB):</strong> {{ processos.usedMemoryGB | number:'1.2-2' }} GB</p>
+      <p><strong>Memória livre (GB):</strong> {{ processos.availableMemoryGB | number:'1.2-2' }} GB</p>
+      <p><strong>Memória total (GB):</strong> {{ processos.totalMemoryGB | number:'1.2-2' }} GB</p>
+      <p><strong>Uso de memória (%):</strong> {{ (processos.usedMemoryGB / processos.totalMemoryGB * 100) | number:'1.2-2' }}%</p>
+    </ng-container>
+  </div>
 
-  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
-  
-  <!-- <div id="container" style="width: 100%; height: 400px;"></div>
-
-
-  <highcharts-chart
-  [Highcharts]="Highcharts"
-  [options]="chartOptions"
-  [(update)]="updateFlag"
-  [oneToOne]="oneToOneFlag"
-
-  style="width: 100%; height: 400px; display: block;"
-></highcharts-chart> -->
-<!--
-  <div *ngIf="pieChart">
-    <div class="pie" [chart]="pieChart"></div>
-  </div> -->
-
-
+  <div id="pie-chart"></div>

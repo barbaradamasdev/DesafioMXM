@@ -27,7 +27,8 @@ public class ProcessosController : ControllerBase
             {
                 Nome = p.ProcessName,
                 Id = p.Id,
-                MemoriaPagedKB = p.PagedMemorySize64 / 1024
+                MemoriaPagedKB = p.PagedMemorySize64 / 1024,
+                Estado = p.Responding ? "Em execução" : "Não respondendo",
             }).ToList();
 
             
@@ -60,14 +61,37 @@ public class ProcessosController : ControllerBase
 
 
             PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
-            float cpuUsage = cpuCounter.NextValue();
+             Thread.Sleep(500);
+             float cpuUsage = cpuCounter.NextValue();
+             Thread.Sleep(500);
+             cpuUsage = cpuCounter.NextValue();
+
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+            List<DriveInfoDto> driveInfoList = new List<DriveInfoDto>();
+
+            foreach (DriveInfo drive in allDrives)
+            {
+                if (drive.IsReady)
+                {
+                    DriveInfoDto driveDto = new DriveInfoDto
+                    {
+                        DriveName = drive.Name,
+                        DriveType = drive.DriveType,
+                        TotalSize = drive.TotalSize,
+                        AvailableFreeSpace = drive.AvailableFreeSpace
+                    };
+
+                    driveInfoList.Add(driveDto);
+                }
+            }
 
             var cpu = new CPUInfoDto
             {
                 UserName = Environment.UserName,
                 MachineName = Environment.MachineName,
                 ProcessorCount = Environment.ProcessorCount,
-                PercentUsed = cpuUsage
+                PercentUsed = cpuUsage,
+                Drives = driveInfoList
             };
 
             var processInfo = new
@@ -78,7 +102,7 @@ public class ProcessosController : ControllerBase
             };
 
             await _hubContext.Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
-            await Task.Delay(500);
+            await Task.Delay(5000);
             return Ok(processInfo);
 
         }
@@ -88,4 +112,5 @@ public class ProcessosController : ControllerBase
     {
         return Process.GetProcesses();
     }
+
 }

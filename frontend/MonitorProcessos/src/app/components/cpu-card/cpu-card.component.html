@@ -1,10 +1,11 @@
-<h1>CPU</h1>
-<ng-container *ngIf="processos">
-  <p><strong>Nome do usuário:</strong>  {{ processos.userName }}</p>
-  <p><strong>Nome da máquina:</strong>  {{ processos.machineName }}</p>
-  <p><strong>Número de processadores:</strong>  {{ processos.processorCount }}</p>
-  <p><strong>Uso de CPU (%):</strong>  {{ processos.percentUsed | number:'1.2-2'  }}%</p>
-</ng-container>
+<div>
+  <h1>CPU</h1>
+  <ng-container *ngIf="processos">
+    <p><strong>Nome do usuário:</strong>  {{ processos.userName }}</p>
+    <p><strong>Nome da máquina:</strong>  {{ processos.machineName }}</p>
+    <p><strong>Número de processadores:</strong>  {{ processos.processorCount }}</p>
+    <p><strong>Uso de CPU (%):</strong>  {{ processos.percentUsed | number:'1.2-2'  }}%</p>
+  </ng-container>
+</div>
 
-<!-- <div class="line" [chart]="lineChart"></div> -->
-<!-- <p>criar scroll no grafico linha</p> -->
+<div id="curve-chart"></div>

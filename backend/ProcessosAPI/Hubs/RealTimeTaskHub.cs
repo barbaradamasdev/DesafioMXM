@@ -15,7 +15,8 @@ public class RealTimeTaskHub : Hub
             {
                 Nome = p.ProcessName,
                 Id = p.Id,
-                MemoriaPagedKB = p.PagedMemorySize64 / 1024
+                MemoriaPagedKB = p.PagedMemorySize64 / 1024,
+                Estado = p.Responding ? "Em execução" : "Não respondendo",
             }).ToList();
 
             float totalMemory = 0f;
@@ -45,21 +46,38 @@ public class RealTimeTaskHub : Hub
                 TotalMemoryGB = totalMemory,
             };
 
-            // PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
-            // float cpuUsage = cpuCounter.NextValue();
-
              PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
              Thread.Sleep(500);
              float cpuUsage = cpuCounter.NextValue();
              Thread.Sleep(500);
              cpuUsage = cpuCounter.NextValue();
 
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+            List<DriveInfoDto> driveInfoList = new List<DriveInfoDto>();
+
+            foreach (DriveInfo drive in allDrives)
+            {
+                if (drive.IsReady)
+                {
+                    DriveInfoDto driveDto = new DriveInfoDto
+                    {
+                        DriveName = drive.Name,
+                        DriveType = drive.DriveType,
+                        TotalSize = drive.TotalSize,
+                        AvailableFreeSpace = drive.AvailableFreeSpace
+                    };
+
+                    driveInfoList.Add(driveDto);
+                }
+            }
+
             var cpu = new CPUInfoDto
             {
                 UserName = Environment.UserName,
                 MachineName = Environment.MachineName,
                 ProcessorCount = Environment.ProcessorCount,
-                PercentUsed = cpuUsage
+                PercentUsed = cpuUsage,
+                Drives = driveInfoList
             };
 
             var processInfo = new
@@ -74,8 +92,10 @@ public class RealTimeTaskHub : Hub
         }
     }
 
+
     private Process[] GetProcessesInfo()
     {
         return Process.GetProcesses();
     }
+
 }
