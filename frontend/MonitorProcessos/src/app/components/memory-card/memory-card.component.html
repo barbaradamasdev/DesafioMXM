@@ -2,7 +2,7 @@
     <h1>Memória</h1>
     <div class="wrapper small-card">
 
-      <div>
+      <div  *ngIf="processos; else noDrives">
         <ng-container *ngIf="processos">
           <p><strong>Memória em uso (GB):</strong> {{ processos.usedMemoryGB | number:'1.2-2' }} GB</p>
           <p><strong>Memória livre (GB):</strong> {{ processos.availableMemoryGB | number:'1.2-2' }} GB</p>
@@ -15,5 +15,9 @@
         <div id="pie-chart"></div>
       </div>
     </div>
+
+    <ng-template #noDrives>
+      <p>Memória inexistente</p>
+    </ng-template>
 </div>
 

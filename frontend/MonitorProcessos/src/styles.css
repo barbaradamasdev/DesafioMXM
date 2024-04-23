@@ -93,13 +93,12 @@ h1 {
 }
 
 button {
-  max-width: 150px;
+  width: 50px;
   border-radius: 15px;
   padding: 10px;
   border: none;
   background: var(--clr-light);
   margin-bottom: 20px;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.216);
   font-weight: 500;
 }
 
