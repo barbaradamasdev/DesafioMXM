@@ -2,10 +2,10 @@
   <h1>Drive</h1>
   <ng-container *ngIf="processos">
     <div *ngIf="processos.drives && processos.drives.length > 0; else noDrives">
+      <p *ngIf="processos.drives && processos.drives.length > 1;"><strong>Selecione abaixo para ver detalhes:</strong></p>
       <div class="wrapper small-card">
         <div>
-          <p><strong>Selecione abaixo para ver detalhes:</strong></p>
-          <div class="buttons">
+          <div *ngIf="processos.drives && processos.drives.length > 1;" class="buttons">
             <button *ngFor="let disk of processos.drives; let i = index"
                     (click)="selectDrive(i)"
                     [ngClass]="{ 'selected': i === selectedDriveIndex }">
@@ -14,7 +14,7 @@
           </div>
 
           <ng-container *ngIf="selectedDriveIndex !== null">
-            <h2><strong>Informações do drive:</strong></h2>
+            <h2 *ngIf="processos.drives && processos.drives.length > 1;"><strong>Informações do drive:</strong></h2>
             <p><strong>Nome do drive:</strong> {{ processos.drives[selectedDriveIndex].driveName }}</p>
             <p><strong>Tipo de drive:</strong> {{ getDriveTypeName(processos.drives[selectedDriveIndex].driveType) }}</p>
             <p><strong>Tamanho total:</strong> {{ (processos.drives[selectedDriveIndex].totalSize / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>

@@ -1,3 +1,8 @@
+.bg {
+  background: rgb(248, 248, 248);
+}
+
+
 .grid {
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
@@ -34,5 +39,9 @@
     'card-3'
     'card-4';
     gap: 20px;
+  }
+
+  .container {
+    padding: 20px;
   }
 }

@@ -1,13 +1,13 @@
 .chart {
   max-width: 100%;
   overflow: hidden;
-  width: 600px;
+  width: 650px;
   height: 450px;
 }
 
 #curve-chart {
   margin-top: -70px;
-  margin-left: -80px;
+  margin-left: -50px;
   width: 800px;
   height: 500px;
 }
