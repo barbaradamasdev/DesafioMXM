@@ -52,7 +52,8 @@ export class DiskCardComponent implements OnInit, OnChanges  {
 
     var options = {
       'is3D': true,
-      'colors': ['#140431', '#720cdb'],
+      'colors': ['green', '#ca2d2d'],
+      // 'colors': ['#140431', '#720cdb'],
     };
 
     var chart = new google.visualization.PieChart(document.getElementById(`disk-chart`));

@@ -37,6 +37,7 @@ export class MemoryCardComponent implements OnInit, OnChanges  {
     }
   }
 
+
   drawChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
@@ -48,7 +49,8 @@ export class MemoryCardComponent implements OnInit, OnChanges  {
 
     var options = {
       'pieHole':0.4,
-      'colors': ['#140431', '#720cdb'],
+      'colors': ['green', '#ca2d2d'],
+      // 'colors': ['#140431', '#720cdb'],
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('pie-chart'));
