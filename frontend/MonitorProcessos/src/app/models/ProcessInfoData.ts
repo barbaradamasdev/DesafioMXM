@@ -23,6 +23,7 @@ export interface CPU {
   processorCount: number;
   percentUsed: number;
   drives: Drives[];
+  cpuList: number[];
 }
 
 export interface Drives {

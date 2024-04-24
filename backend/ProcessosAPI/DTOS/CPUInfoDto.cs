@@ -7,5 +7,5 @@ public class CPUInfoDto
     public int ProcessorCount { get; set; }
     public float PercentUsed { get; set; }
     public required List<DriveInfoDto> Drives { get; set; }
-
+    public List<float>? CpuList { get; set; }
 }

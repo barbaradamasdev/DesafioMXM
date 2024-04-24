@@ -5,6 +5,7 @@ using ProcessosAPI.DTOS;
 
 public class RealTimeTaskHub : Hub
 {
+    private List<float> cpuList = new List<float>();
     public override async Task OnConnectedAsync()
     {
         Console.WriteLine($"Client connected: {Context.ConnectionId}");
@@ -71,13 +72,16 @@ public class RealTimeTaskHub : Hub
                 }
             }
 
+            cpuList.Add(cpuUsage);
+
             var cpu = new CPUInfoDto
             {
                 UserName = Environment.UserName,
                 MachineName = Environment.MachineName,
                 ProcessorCount = Environment.ProcessorCount,
                 PercentUsed = cpuUsage,
-                Drives = driveInfoList
+                Drives = driveInfoList,
+                CpuList = cpuList
             };
 
             var processInfo = new
@@ -88,10 +92,10 @@ public class RealTimeTaskHub : Hub
             };
 
             await Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
-            await Task.Delay(5500); //TODO reduzir tempo apos layout
+            Console.WriteLine(DateTime.Now.ToString(""));
+            await Task.Delay(2000); //TODO reduzir tempo apos layout
         }
     }
-
 
     private Process[] GetProcessesInfo()
     {

@@ -1,4 +1,3 @@
-//TODO somente para funcionar swagger
 using System.Diagnostics;
 using System.Management;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +18,7 @@ public class ProcessosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetProcessInfo()
+    public IActionResult GetProcessInfo()
     {
         while (true)
         {
@@ -101,10 +100,7 @@ public class ProcessosController : ControllerBase
                 CPU = cpu
             };
 
-            await _hubContext.Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
-            await Task.Delay(5000);
             return Ok(processInfo);
-
         }
     }
 

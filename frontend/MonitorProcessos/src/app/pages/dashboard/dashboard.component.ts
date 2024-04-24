@@ -21,6 +21,7 @@ export class DashboardComponent {
 
   ngOnInit(): void {
     this.signalRService.startConnection();
+
     this.signalRService.processInfo$.subscribe(data => {
       this.dataUpdate = data;
       // console.log("Data:", this.dataUpdate);

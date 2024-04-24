@@ -10,7 +10,10 @@ export class SignalRService {
   private hubConnection!: signalR.HubConnection;
 
   private processInfoSubject = new Subject<any>();
+  private cpuListSubject = new Subject<number[]>();
+
   processInfo$ = this.processInfoSubject.asObservable();
+  cpuList$ = this.cpuListSubject.asObservable();
 
   constructor() { }
 
@@ -23,6 +26,10 @@ export class SignalRService {
       .start()
       .then(() => console.log('Conexão SignalR estabelecida'))
       .catch(err => console.error('Erro ao estabelecer conexão SignalR: ', err));
+
+    this.hubConnection.on('InitialProcessInfo', (cpuList: number[]) => {
+      this.cpuListSubject.next(cpuList);
+    });
 
     this.hubConnection.on('ReceiveProcessInfo', (data) => {
       this.processInfoSubject.next(data);

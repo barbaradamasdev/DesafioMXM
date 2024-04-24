@@ -1,7 +1,7 @@
 <div>
   <h1>Drive</h1>
-  <ng-container *ngIf="processos">
-    <div *ngIf="processos.drives && processos.drives.length > 0; else noDrives">
+  <ng-container *ngIf="processos; else noDrives">
+    <div *ngIf="processos.drives && processos.drives.length > 0;">
       <p *ngIf="processos.drives && processos.drives.length > 1;"><strong>Selecione abaixo para ver detalhes:</strong></p>
       <div class="wrapper small-card">
         <div>
@@ -29,9 +29,9 @@
         </div>
       </div>
     </div>
-
-    <ng-template #noDrives>
-      <p>Drive inexistente</p>
-    </ng-template>
   </ng-container>
+
+  <ng-template #noDrives>
+    <p>Drive inexistente</p>
+  </ng-template>
 </div>

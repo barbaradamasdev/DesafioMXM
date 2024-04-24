@@ -2,10 +2,22 @@
   <section class="container">
 
     <div *ngIf="dataUpdate" class="grid">
-      <app-memory-card class="card" [processos]="dataUpdate ? dataUpdate.memoria : null"></app-memory-card>
-      <app-disk-card class="card" [processos]="dataUpdate ? dataUpdate.cpu : null"></app-disk-card>
-      <app-cpu-card class="card" [processos]="dataUpdate ? dataUpdate.cpu : null"></app-cpu-card>
-      <app-process-list class="card" [processos]="dataUpdate ? dataUpdate : null"></app-process-list>
+      <app-memory-card class="card"
+      [processos]="dataUpdate ? dataUpdate.memoria : null"
+      ></app-memory-card>
+
+      <app-disk-card class="card"
+      [processos]="dataUpdate ? dataUpdate.cpu : null"
+      ></app-disk-card>
+
+      <app-cpu-card class="card"
+      [processos]="dataUpdate ? dataUpdate.cpu : null"
+      ></app-cpu-card>
+
+      <app-process-list class="card"
+      [processos]="dataUpdate ? dataUpdate : null"
+      ></app-process-list>
+
     </div>
 
   </section>
