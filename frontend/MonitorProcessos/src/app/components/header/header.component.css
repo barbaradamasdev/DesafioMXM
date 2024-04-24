@@ -6,14 +6,15 @@ header {
 
 .container {
   align-items: center;
-  padding: 20 30px;
+  padding: 20px 30px;
   gap: 40px;
   justify-content: space-between;
 }
 
 .logo {
-  width: 250px;
+  width: 200px;
   max-width: 90vw;
+  cursor: pointer;
 }
 
 li {
@@ -36,14 +37,24 @@ li, ul {
   padding: 0;
 }
 
-@media (max-width: 625px) {
-  nav {
+@media (max-width: 900px) {
+  .contact {
     display: none;
   }
+}
 
-  .flex {
+@media (max-width: 645px) {
+  .flex.container {
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
   }
+}
 
+
+@media (max-width: 350px) {
+  li {
+    font-size: 18px;
+  }
 }

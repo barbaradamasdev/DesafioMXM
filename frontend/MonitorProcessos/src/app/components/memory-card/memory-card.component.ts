@@ -48,7 +48,7 @@ export class MemoryCardComponent implements OnInit, OnChanges  {
     ]);
 
     var options = {
-      'pieHole':0.4,
+      'pieHole':0.3,
       'colors': ['green', '#ca2d2d'],
       // 'colors': ['#140431', '#720cdb'],
     };

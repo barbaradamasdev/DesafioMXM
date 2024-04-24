@@ -1,0 +1,14 @@
+.bg {
+  background: rgb(248, 248, 248);
+  height: 90vh;
+}
+
+@media (max-width: 915px) {
+  .container {
+    padding: 20px;
+  }
+}
+
+app-process-list  > .table-responsive {
+    max-height: inherit;
+}

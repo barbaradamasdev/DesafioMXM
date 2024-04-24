@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { ProcessInfoData } from '../../models/ProcessInfoData';
 import { SignalRService } from '../../services/signal-r.service';
 import { CommonModule } from '@angular/common';
-import { ProcessListComponent } from "../process-list/process-list.component";
-import { MemoryCardComponent } from "../memory-card/memory-card.component";
-import { CpuCardComponent } from "../cpu-card/cpu-card.component";
-import { DiskCardComponent } from "../disk-card/disk-card.component";
+import { ProcessListComponent } from "../../components/process-list/process-list.component";
+import { MemoryCardComponent } from "../../components/memory-card/memory-card.component";
+import { CpuCardComponent } from "../../components/cpu-card/cpu-card.component";
+import { DiskCardComponent } from "../../components/disk-card/disk-card.component";
 
 @Component({
     selector: 'app-dashboard',

@@ -1,0 +1,10 @@
+<div class="bg">
+  <section class="container">
+
+    <div *ngIf="dataUpdate" class="grid">
+      <app-process-list class="card" [processos]="dataUpdate ? dataUpdate : null"></app-process-list>
+    </div>
+
+  </section>
+
+</div>

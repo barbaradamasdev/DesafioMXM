@@ -8,7 +8,8 @@
   grid-template-areas:
   'card-1 card-2'
   'card-3 card-3'
-  'card-4 card-4';
+  'card-4 card-4'
+  ;
   gap: 20px;
 }
 

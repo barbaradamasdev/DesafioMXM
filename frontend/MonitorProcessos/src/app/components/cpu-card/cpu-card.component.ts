@@ -34,7 +34,7 @@ export class CpuCardComponent implements OnInit  {
       this.drawChart();
       setInterval(() => {
         this.updateChart();
-      }, 1000);
+      }, 2000);
     });
   }
 

@@ -1,26 +1,27 @@
-.chart {
-  max-width: 100%;
-  overflow: hidden;
-  width: 650px;
-  height: 450px;
-}
-
-#curve-chart {
-  margin-top: -70px;
-  margin-left: -50px;
-  width: 800px;
-  height: 500px;
-}
-
-@media (min-width: 1200px) {
   .chart {
-    width: 1000px;
+    overflow: hidden;
     max-width: 75vw;
+    width: 783px;
+    height: 250px !important;
+    margin-bottom: -20px;
   }
 
   #curve-chart {
-    margin-top: -50px;
-    width: 1200px;
+    margin-top: 0px;
+    width: 850px;
     max-width: 90vw;
+  }
+
+@media (max-width: 900px) {
+  .chart {
+    width: 1103px !important;
+    max-width: 87vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .chart {
+    width: 1103px !important;
+    max-width: 87vw;
   }
 }
