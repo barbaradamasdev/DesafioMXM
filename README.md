@@ -81,5 +81,9 @@ Desafio para a seleção da MXM. O Objetivo era criar um monitor de processos do
 
 - Foi desafiante encontrar uma biblioteca certa que atendesse às necessidades específicas de manter de forma dinâmica o gráfico para refletir as mudanças em tempo real. Procurando por bibliotecas encontrei a do Google que foi a utilizada no projeto. Com essa, tive uma nova dificuldade que foi de ajustar o tamanho e a aparência do gráfico garantindo uma experiência visual agradável e pensando em usabilidade.
 
+### Integração com Versões Antigas do Angular
+
+- Na tentativa do deploy obtive erros na versão do Google Charts que é incompatível com a versão do framework. A solução encontrada foi utilizar a flag `--legacy-peer-deps` durante a instalação, mesmo não sendo recomendado. Essa medida foi necessária para evitar conflitos no projeto e permitir a integração do Google Charts com o Angular 17.
+
 ## 🐼 Autora
 Bárbara Damasceno | barbaradsa@gmail.com | [Linkedin](https://www.linkedin.com/in/barbaradamascenodev) | [Portfolio](https://barbaradamasceno.vercel.app/)
