@@ -83,6 +83,3 @@ Desafio para a seleção da MXM. O Objetivo era criar um monitor de processos do
 
 ## 🐼 Autora
 Bárbara Damasceno | barbaradsa@gmail.com | [Linkedin](https://www.linkedin.com/in/barbaradamascenodev) | [Portfolio](https://barbaradamasceno.vercel.app/)
-<hr>
-
-[Voltar ao Início](#index) 👆🏻

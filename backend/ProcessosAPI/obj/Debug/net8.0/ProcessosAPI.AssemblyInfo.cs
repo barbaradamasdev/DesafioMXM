@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProcessosAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7cb1bda2a1d04e1af30df0e2a6e971f44cd2f97c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96035b1f2dd0a7e0759928c9f12eb55aa4e04bcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProcessosAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProcessosAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
