@@ -154,7 +154,7 @@ a:hover {
 
 @media (max-width: 460px) {
   #disk-chart{
-    margin-left: -80px !important;
+    margin-left: -40px !important;
     width: 430px !important;
   }
 }

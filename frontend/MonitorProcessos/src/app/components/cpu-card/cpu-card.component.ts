@@ -15,8 +15,9 @@ declare var google:any;
 export class CpuCardComponent implements OnInit  {
   @Input() processos: ProcessInfoData['cpu'] | null = null;
 
-  private dataTable: google.visualization.DataTable | null = null;
-  private options: google.visualization.LineChartOptions;
+  dataTable: google.visualization.DataTable | null = null;
+  options: google.visualization.LineChartOptions;
+
   count : number = -2;
 
   constructor(){
@@ -36,7 +37,7 @@ export class CpuCardComponent implements OnInit  {
       this.drawChart();
       setInterval(() => {
         this.updateChart();
-      }, 1000);
+      }, 2000);
     });
   }
 
@@ -53,15 +54,6 @@ export class CpuCardComponent implements OnInit  {
       } else {
         this.dataTable!.addRow([this.getCount(), this.processos.percentUsed]);
       }
-
-      const options = {
-        curveType: 'function',
-        legend: { position: 'bottom' },
-        colors: ['#720cdb'],
-        vAxis: {
-          title: 'Uso da CPU (%)'
-        }
-      };
 
       const chart = new google.visualization.LineChart(document.getElementById('curve-chart'));
       chart.draw(this.dataTable, this.options);

@@ -92,8 +92,8 @@ public class RealTimeTaskHub : Hub
             };
 
             await Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
-            Console.WriteLine(DateTime.Now.ToString(""));
-            await Task.Delay(2000); //TODO reduzir tempo apos layout
+            // Console.WriteLine(DateTime.Now.ToString(""));
+            await Task.Delay(2000);
         }
     }
 

@@ -3,11 +3,12 @@ import { ProcessInfoData } from '../../models/ProcessInfoData';
 import { CommonModule } from '@angular/common';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-process-list',
   standalone: true,
-  imports: [CommonModule, MatSortModule],
+  imports: [CommonModule, MatSortModule, FormsModule, ReactiveFormsModule],
   templateUrl: './process-list.component.html',
   styleUrl: './process-list.component.css'
 })
@@ -16,6 +17,8 @@ export class ProcessListComponent implements OnInit, AfterViewInit {
   @Input() processos: ProcessInfoData | null = null;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any>();
+
+  filtroTexto: string = '';
 
   constructor() {}
 
@@ -27,6 +30,21 @@ export class ProcessListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  passaFiltro(processo: any): boolean {
+    if (!this.filtroTexto) {
+      return true;
+    }
+
+    const textoFiltrado = this.filtroTexto.toLowerCase();
+    const nomeProcesso = processo.nome.toLowerCase();
+    const idProcesso = processo.id.toString().toLowerCase();
+    const estadoProcesso = processo.estado.toLowerCase();
+
+    return nomeProcesso.includes(textoFiltrado) ||
+          idProcesso.includes(textoFiltrado) ||
+          estadoProcesso.includes(textoFiltrado);
   }
 
   sortData(sortField: string) {

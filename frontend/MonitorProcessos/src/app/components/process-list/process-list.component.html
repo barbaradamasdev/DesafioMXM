@@ -1,4 +1,8 @@
 <h1>Processos</h1>
+<div class="input-group">
+  <input type="text" class="form-control search-input"  [(ngModel)]="filtroTexto" placeholder="Pesquisar processo">
+</div>
+
 <ng-container *ngIf="processos; else noDrives">
   <div class="table-responsive">
 
@@ -13,10 +17,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let processo of dataSource.data">
-          <td>{{ processo?.nome }}</td>
-          <td>{{ processo?.id }}</td>
-          <td>{{ (processo?.memoriaPagedKB / 1024) | number:'1.2-2' }} MB</td>
-          <td>{{ processo?.estado }}</td>
+          <ng-container *ngIf="passaFiltro(processo)">
+            <td>{{ processo?.nome }}</td>
+            <td>{{ processo?.id }}</td>
+            <td>{{ (processo?.memoriaPagedKB / 1024) | number:'1.2-2' }} MB</td>
+            <td>{{ processo?.estado }}</td>
+          </ng-container>
         </tr>
       </tbody>
     </table>

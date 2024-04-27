@@ -22,7 +22,6 @@ export class PageChartsComponent {
     this.signalRService.startConnection();
     this.signalRService.processInfo$.subscribe(data => {
       this.dataUpdate = data;
-      // console.log("Data:", this.dataUpdate);
     }, error => {
       console.error('Erro ao receber dados do SignalR: ', error);
     });
