@@ -41,12 +41,12 @@ Desafio para a seleção da MXM. O Objetivo era criar um monitor de processos do
 > cd frontend/MonitorProcessos
 
 # Instale as dependências do Angular
-> npm install
+> npm install --legacy-peer-deps
 
 # Inicie o servidor de desenvolvimento do Angular
 > ng serve
 ```
-
+>💡💡💡**Nota**: Embora não seja recomendado o uso do `--legacy-peer-deps`, é necessário neste caso para forçar a instalação. A versão do Google Charts utilizada é muito antiga para o Angular 17, e esta solução foi adotada porque não gerou conflitos no nível do projeto.
 
 ## 👑 Demonstração
 
