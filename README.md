@@ -64,11 +64,8 @@ Desafio para a seleção da MXM. O Objetivo era criar um monitor de processos do
 |-------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------|
 | SignalR                                   | Biblioteca que facilita a adição de funcionalidades em tempo real aos aplicativos web. | [SignalR](https://dotnet.microsoft.com/apps/aspnet/real-time)               |
 | Swagger                                   | Ferramenta para documentação de APIs RESTful.                                     | [Swagger](https://swagger.io/)                                           |
-| Diagnostics                        | Namespace do .NET que fornece classes para interagir com o sistema operacional.   | [System.Diagnostics](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics)   |
-| Management                         | Namespace para acesso e interação com informações de gerenciamento do sistema operacional Windows. | [System.Management](https://docs.microsoft.com/en-us/dotnet/api/system.management)    |
 | PerformanceCounter                        | Classe para acessar e monitorar o desempenho do sistema, incluindo o uso da CPU.  | [PerformanceCounter](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.performancecounter) |
 | Management Object Searcher                 | Classe para executar consultas WMI (Instrumentação de Gerenciamento do Windows) e recuperar informações sobre o sistema operacional. | [ManagementObjectSearcher](https://docs.microsoft.com/en-us/dotnet/api/system.management.managementobjectsearcher) |
-| @microsoft/signalr          | Cliente JavaScript para conectar-se a um hub SignalR e receber atualizações em tempo real do servidor.                                                   | [SignalR](https://github.com/aspnet/AspNetCore/tree/main/src/SignalR) |
 | Google Charts               | Biblioteca JavaScript para criar gráficos interativos e visualizações de dados na web.                                                                  | [Google Charts](https://developers.google.com/chart) |
 
 ## 🛠 Desafios e Soluções Enfrentados
