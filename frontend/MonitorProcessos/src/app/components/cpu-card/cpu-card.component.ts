@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProcessInfoData } from '../../models/ProcessInfoData';
 import { GoogleChartsModule } from 'angular-google-charts';
 
