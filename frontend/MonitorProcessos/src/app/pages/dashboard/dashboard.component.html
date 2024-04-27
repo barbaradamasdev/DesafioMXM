@@ -1,25 +1,22 @@
 <div class="bg">
   <section class="container">
 
-    <div *ngIf="dataUpdate" class="grid">
-      <app-memory-card class="card"
-      [processos]="dataUpdate ? dataUpdate.memoria : null"
-      ></app-memory-card>
-
-      <app-disk-card class="card"
-      [processos]="dataUpdate ? dataUpdate.cpu : null"
-      ></app-disk-card>
-
-      <app-cpu-card class="card"
-      [processos]="dataUpdate ? dataUpdate.cpu : null"
-      ></app-cpu-card>
-
-      <app-process-list class="card"
-      [processos]="dataUpdate ? dataUpdate : null"
-      ></app-process-list>
-
+    <div class="flex" *ngIf="isLoading; else content">
+      <div class="loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
 
-  </section>
 
+    <ng-template #content>
+      <div class="grid">
+        <app-memory-card class="card" [processos]="dataUpdate ? dataUpdate.memoria : null"></app-memory-card>
+        <app-disk-card class="card" [processos]="dataUpdate ? dataUpdate.cpu : null"></app-disk-card>
+        <app-cpu-card class="card" [processos]="dataUpdate ? dataUpdate.cpu : null"></app-cpu-card>
+        <app-process-list class="card" [processos]="dataUpdate ? dataUpdate : null"></app-process-list>
+      </div>
+    </ng-template>
+  </section>
 </div>

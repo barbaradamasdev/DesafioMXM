@@ -1,7 +1,48 @@
 .bg {
   background: rgb(248, 248, 248);
+  min-height: 90vh;
 }
 
+.loading-dots {
+  margin: 97px auto;
+ }
+
+ .loading-dots span {
+  background:var(--clr-medium);
+  border-radius:100%;
+  display:inline-block;
+  width:18px;
+  height:18px;
+  margin:2px 2px;
+  -webkit-animation:loading-dots 0.8s linear infinite alternate;
+  animation:loading-dots 0.8s linear infinite alternate;
+ }
+
+ .loading-dots span:nth-child(1){
+  -webkit-animation-delay:-0.8;
+  animation-delay:-0.8s;
+
+ }
+
+ .loading-dots span:nth-child(2) {
+  -webkit-animation-delay:-0.53333s;
+  animation-delay:-0.53333s;
+ }
+
+ .loading-dots span:nth-child(3) {
+  -webkit-animation-delay:-0.26666s;
+  animation-delay:-0.26666s;
+ }
+
+ @keyframes loading-dots{
+  from {transform: scale(0, 0);}
+  to {transform: scale(1, 1);}
+ }
+
+ @-webkit-keyframes loading-dots{
+  from {-webkit-transform: scale(0, 0);}
+  to {-webkit-transform: scale(1, 1);}
+ }
 
 .grid {
   grid-template-columns: 1fr 1fr;

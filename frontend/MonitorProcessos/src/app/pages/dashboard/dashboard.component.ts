@@ -16,16 +16,23 @@ import { DiskCardComponent } from "../../components/disk-card/disk-card.componen
 })
 export class DashboardComponent {
   dataUpdate: ProcessInfoData | null = null;
+  isLoading: boolean = true;
 
   constructor(private signalRService: SignalRService) { }
 
   ngOnInit(): void {
     this.signalRService.startConnection();
 
-    this.signalRService.processInfo$.subscribe(data => {
-      this.dataUpdate = data;
-    }, error => {
-      console.error('Erro ao receber dados do SignalR: ', error);
-    });
+    this.signalRService.processInfo$.subscribe(
+      data => {
+        this.dataUpdate = data;
+        this.isLoading = false;
+      },
+      error => {
+        console.error('Erro ao receber dados do SignalR: ', error);
+        this.isLoading = false;
+      }
+    );
+
   }
 }
