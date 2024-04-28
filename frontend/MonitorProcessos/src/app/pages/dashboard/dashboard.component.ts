@@ -30,7 +30,7 @@ export class DashboardComponent {
       },
       error => {
         console.error('Erro ao receber dados do SignalR: ', error);
-        this.isLoading = false;
+        this.isLoading = true;
       }
     );
 

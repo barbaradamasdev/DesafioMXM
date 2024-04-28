@@ -25,8 +25,10 @@ export class SignalRService {
     this.hubConnection
       .start()
       .then(() => console.log('Conexão SignalR estabelecida'))
-      .catch(err => console.error('Erro ao estabelecer conexão SignalR: ', err));
-
+      .catch(err => {
+        console.error('Error while starting connection: ', err);
+        alert('Não foi possível conectar ao servidor. Por favor, verifique sua conexão com a internet ou tente novamente mais tarde.');
+      });
     this.hubConnection.on('InitialProcessInfo', (cpuList: number[]) => {
       this.cpuListSubject.next(cpuList);
     });
