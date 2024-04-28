@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FzPTQfK/bZb+Y+hdskGe+NjcByiMtRAsCBe7sWJV6idsX8IFY+p2U73f3vtNFgR0q30nC+P3f+rNtwWr+CBgOg==",
+  "dgSpecHash": "CHk5giRYlLgrK3BuIpsc0opmEaWkfw7Z03njsoSoyPglLmaaa86P4xoVtZZ2JzjADGbFhPdEPShCyDcYNa5BBw==",
   "success": true,
-  "projectFilePath": "C:\\dev\\MonitorProcessos\\backend\\ProcessosAPI\\ProcessosAPI.csproj",
+  "projectFilePath": "C:\\dev\\MXM\\DesafioMXM\\backend\\ProcessosAPI\\ProcessosAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\barba\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\barba\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",

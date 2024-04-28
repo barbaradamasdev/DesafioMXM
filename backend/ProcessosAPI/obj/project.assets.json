@@ -2834,11 +2834,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\dev\\MonitorProcessos\\backend\\ProcessosAPI\\ProcessosAPI.csproj",
+      "projectUniqueName": "C:\\dev\\MXM\\DesafioMXM\\backend\\ProcessosAPI\\ProcessosAPI.csproj",
       "projectName": "ProcessosAPI",
-      "projectPath": "C:\\dev\\MonitorProcessos\\backend\\ProcessosAPI\\ProcessosAPI.csproj",
+      "projectPath": "C:\\dev\\MXM\\DesafioMXM\\backend\\ProcessosAPI\\ProcessosAPI.csproj",
       "packagesPath": "C:\\Users\\barba\\.nuget\\packages\\",
-      "outputPath": "C:\\dev\\MonitorProcessos\\backend\\ProcessosAPI\\obj\\",
+      "outputPath": "C:\\dev\\MXM\\DesafioMXM\\backend\\ProcessosAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\barba\\AppData\\Roaming\\NuGet\\NuGet.Config",

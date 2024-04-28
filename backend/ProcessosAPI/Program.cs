@@ -1,4 +1,3 @@
-using System.Reflection;
 using ProcessosAPI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,9 +29,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.MapHub<RealTimeTaskHub>("/hub");
-
-app.UseDefaultFiles();
-app.UseStaticFiles();
 
 app.UseCors();
 
