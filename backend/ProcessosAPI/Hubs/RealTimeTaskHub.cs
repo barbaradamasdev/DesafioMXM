@@ -24,7 +24,7 @@ public class RealTimeTaskHub : Hub
             float availableMemory = 0f;
             float usedMemory = 0f;
 
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+            ManagementObjectSearcher searcher = new ("SELECT * FROM Win32_OperatingSystem");
             foreach (ManagementObject queryObj in searcher.Get())
             {
                 ulong totalPhysicalMemory = Convert.ToUInt64(queryObj["TotalVisibleMemorySize"]);
@@ -92,7 +92,6 @@ public class RealTimeTaskHub : Hub
             };
 
             await Clients.All.SendAsync("ReceiveProcessInfo", processInfo);
-            // Console.WriteLine(DateTime.Now.ToString(""));
             await Task.Delay(2000);
         }
     }

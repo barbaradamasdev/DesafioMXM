@@ -4,7 +4,8 @@
 
 Desafio para a seleção da MXM. O Objetivo era criar um monitor de processos do Sistema operacional, listando os processos, os recursos consumidos, com opção de ordenação nas colunas e utilizar gráficos para ilustrar o processamento.
 
-<img src="./screenshots/monitor.jpg" alt="Tela Final">
+<img src="./screenshots/monitor-sem-bg.png" alt="Tela Final">
+<!-- <img src="./screenshots/monitor.jpg" alt="Tela Final"> -->
 
 
 
