@@ -1,4 +1,5 @@
 using ProcessosAPI;
+using ProcessosAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
+builder.Services.AddScoped<ProcessosService>();
+builder.Services.AddScoped<MemoriaService>();
+builder.Services.AddScoped<CPUService>();
 
 builder.Services.AddCors(options =>
 {

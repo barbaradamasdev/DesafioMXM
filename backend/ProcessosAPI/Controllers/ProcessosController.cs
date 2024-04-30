@@ -1,8 +1,5 @@
-using System.Diagnostics;
-using System.Management;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using ProcessosAPI.DTOS;
+using ProcessosAPI.Services;
 
 namespace ProcessosAPI.Controllers;
 
@@ -10,103 +7,31 @@ namespace ProcessosAPI.Controllers;
 [Route("api/[controller]")]
 public class ProcessosController : ControllerBase
 {
-    private readonly IHubContext<RealTimeTaskHub> _hubContext;
+    private readonly ProcessosService _processosService;
+    private readonly MemoriaService _memoriaService;
+    private readonly CPUService _CPUService;
 
-    public ProcessosController(IHubContext<RealTimeTaskHub> hubContext)
+    public ProcessosController(ProcessosService processosService, MemoriaService memoriaService, CPUService CPUService)
     {
-        _hubContext = hubContext;
+        _processosService = processosService;
+        _memoriaService = memoriaService;
+        _CPUService = CPUService;
     }
 
     [HttpGet]
     public IActionResult GetProcessInfo()
     {
-        while (true)
+        var processos = _processosService.ObterInformacoesProcessos();
+        var memoria = _memoriaService.ObterInformacoesMemoria();
+        var cpu = _CPUService.ObterInformacoesCPU();
+
+        var processInfo = new
         {
-            var processos = GetProcessesInfo().Select(p => new ProcessInfoDto
-            {
-                Nome = p.ProcessName,
-                Id = p.Id,
-                MemoriaPagedKB = p.PagedMemorySize64 / 1024,
-                Estado = p.Responding ? "Em execução" : "Não respondendo",
-            }).ToList();
+            Processos = processos,
+            Memoria = memoria,
+            CPU = cpu
+        };
 
-            
-            float totalMemory = 0f;
-            float availableMemory = 0f;
-            float usedMemory = 0f;
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
-            foreach (ManagementObject queryObj in searcher.Get())
-            {
-                ulong totalPhysicalMemory = Convert.ToUInt64(queryObj["TotalVisibleMemorySize"]);
-                ulong freePhysicalMemory = Convert.ToUInt64(queryObj["FreePhysicalMemory"]);
-                ulong usedPhysicalMemory = totalPhysicalMemory - freePhysicalMemory;
-
-                float totalMemoryBytes = totalPhysicalMemory;
-                float availableMemoryBytes = freePhysicalMemory;
-                float usedMemoryBytes = usedPhysicalMemory;
-
-                totalMemory = totalMemoryBytes / (1024f * 1024f);
-                availableMemory = availableMemoryBytes / (1024f * 1024f);
-                usedMemory = usedMemoryBytes / (1024f * 1024f);
-            }
-
-            var memoria = new MemoryInfoDto
-            {
-                UsedMemoryGB = usedMemory,
-                AvailableMemoryGB = availableMemory,
-                TotalMemoryGB = totalMemory,
-            };
-
-
-            PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
-             Thread.Sleep(500);
-             float cpuUsage = cpuCounter.NextValue();
-             Thread.Sleep(500);
-             cpuUsage = cpuCounter.NextValue();
-
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-            List<DriveInfoDto> driveInfoList = new List<DriveInfoDto>();
-
-            foreach (DriveInfo drive in allDrives)
-            {
-                if (drive.IsReady)
-                {
-                    DriveInfoDto driveDto = new DriveInfoDto
-                    {
-                        DriveName = drive.Name,
-                        DriveType = drive.DriveType,
-                        TotalSize = drive.TotalSize,
-                        AvailableFreeSpace = drive.AvailableFreeSpace
-                    };
-
-                    driveInfoList.Add(driveDto);
-                }
-            }
-
-            var cpu = new CPUInfoDto
-            {
-                UserName = Environment.UserName,
-                MachineName = Environment.MachineName,
-                ProcessorCount = Environment.ProcessorCount,
-                PercentUsed = cpuUsage,
-                Drives = driveInfoList
-            };
-
-            var processInfo = new
-            {
-                Processos = processos,
-                Memoria = memoria,
-                CPU = cpu
-            };
-
-            return Ok(processInfo);
-        }
+        return Ok(processInfo);
     }
-
-    private Process[] GetProcessesInfo()
-    {
-        return Process.GetProcesses();
-    }
-
 }
