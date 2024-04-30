@@ -33,8 +33,8 @@ export class DiskCardComponent implements OnInit, OnChanges  {
     if (this.processos && this.processos.drives && this.selectedDriveIndex !== null) {
       const drive = this.processos.drives[this.selectedDriveIndex];
 
-      this.diskLivrePercent = (drive.availableFreeSpace / drive.totalSize) * 100;
-      this.diskUtilizadaPercent = (drive.usedSpace / drive.totalSize) * 100;
+      this.diskLivrePercent = (drive.espacoDisponivel / drive.tamanhoTotal) * 100;
+      this.diskUtilizadaPercent = (drive.espacoUtilizado / drive.tamanhoTotal) * 100;
 
       google.charts.load('current', { packages: ['corechart'] });
       google.charts.setOnLoadCallback(this.drawChart.bind(this));

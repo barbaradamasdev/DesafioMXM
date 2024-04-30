@@ -47,12 +47,12 @@ export class CpuCardComponent implements OnInit  {
       this.dataTable!.addColumn('string', 'Uso da CPU (%)');
       this.dataTable!.addColumn('number', 'Tempo (seg)');
 
-      if (this.processos.cpuList) {
-        this.processos.cpuList.forEach((counterPercent) => {
-          this.dataTable!.addRow([this.getCount(), counterPercent]);
+      if (this.processos.listaCPUemPorcentagem) {
+        this.processos.listaCPUemPorcentagem.forEach((counter) => {
+          this.dataTable!.addRow([this.getCount(), counter]);
         });
       } else {
-        this.dataTable!.addRow([this.getCount(), this.processos.percentUsed]);
+        this.dataTable!.addRow([this.getCount(), this.processos.porcentagemUsadaDoCPU]);
       }
 
       const chart = new google.visualization.LineChart(document.getElementById('curve-chart'));
@@ -62,7 +62,7 @@ export class CpuCardComponent implements OnInit  {
 
   updateChart(): void {
     if (this.processos && this.dataTable) {
-      this.dataTable.addRow([this.getCount(), this.processos.percentUsed]);
+      this.dataTable.addRow([this.getCount(), this.processos.porcentagemUsadaDoCPU]);
       const chart = new google.visualization.LineChart(document.getElementById('curve-chart'));
       chart.draw(this.dataTable, this.options);
     }

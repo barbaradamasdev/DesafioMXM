@@ -7,29 +7,29 @@ export interface ProcessInfoData {
 export interface Processo {
   nome: string;
   id: number;
-  memoriaPagedKB: number;
+  memoria: number;
   estado: string;
 }
 
 export interface Memoria {
-  totalMemoryGB: number;
-  availableMemoryGB: number;
-  usedMemoryGB: number;
+  memoriaTotal: number;
+  memoriaDisponivel: number;
+  memoriaUtilizada: number;
 }
 
 export interface CPU {
-  userName: string;
-  machineName: string;
-  processorCount: number;
-  percentUsed: number;
+  nome: string;
+  nomeMaquina: string;
+  contadorDeProcessadores: number;
+  porcentagemUsadaDoCPU: number;
   drives: Drives[];
-  cpuList: number[];
+  listaCPUemPorcentagem: number[];
 }
 
 export interface Drives {
-  driveName: string;
-  driveType: any;
-  totalSize: number;
-  availableFreeSpace: number;
-  usedSpace: number;
+  nome: string;
+  tipo: any;
+  tamanhoTotal: number;
+  espacoDisponivel: number;
+  espacoUtilizado: number;
 }

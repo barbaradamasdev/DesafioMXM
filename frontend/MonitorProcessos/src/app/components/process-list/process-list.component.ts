@@ -25,13 +25,13 @@ export class ProcessListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     if (this.processos) {
       this.dataSource.data = this.processos.processos;
-      this.sortData('memoriaPagedKB');
+      this.sortData('memoria');
     }
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    this.sortData('memoriaPagedKB'); 
+    this.sortData('memoria');
   }
 
   passaFiltro(processo: any): boolean {
@@ -66,8 +66,8 @@ export class ProcessListComponent implements OnInit, AfterViewInit {
           return compare(a.nome, b.nome, isAsc);
         case 'id':
           return compare(a.id, b.id, isAsc);
-        case 'memoriaPagedKB':
-          return compare(a.memoriaPagedKB, b.memoriaPagedKB, isAsc);
+        case 'memoria':
+          return compare(a.memoria, b.memoria, isAsc);
         default:
           return 0;
       }

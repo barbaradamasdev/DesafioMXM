@@ -14,8 +14,8 @@ declare var google:any;
 })
 export class MemoryCardComponent implements OnInit, OnChanges  {
   @Input() processos: ProcessInfoData['memoria'] | null = null;
-  memoriaLivrePercent: number = 0;
-  memoriaUtilizadaPercent: number = 0;
+  memoriaLivrePorcentagem: number = 0;
+  memoriaUtilizadaPorcentagem: number = 0;
 
   constructor(){}
 
@@ -29,8 +29,8 @@ export class MemoryCardComponent implements OnInit, OnChanges  {
 
   updateChart(): void {
     if (this.processos) {
-      this.memoriaLivrePercent = (this.processos.availableMemoryGB / this.processos.totalMemoryGB) * 100;
-      this.memoriaUtilizadaPercent = (this.processos.usedMemoryGB / this.processos.totalMemoryGB) * 100;
+      this.memoriaLivrePorcentagem = (this.processos.memoriaDisponivel / this.processos.memoriaTotal) * 100;
+      this.memoriaUtilizadaPorcentagem = (this.processos.memoriaUtilizada / this.processos.memoriaTotal) * 100;
 
       google.charts.load('current', { packages: ['corechart'] });
       google.charts.setOnLoadCallback(this.drawChart.bind(this));
@@ -42,8 +42,8 @@ export class MemoryCardComponent implements OnInit, OnChanges  {
     data.addColumn('string', 'Topping');
     data.addColumn('number', 'Slices');
     data.addRows([
-      ['Livre', this.memoriaLivrePercent],
-      ['Ocupada', this.memoriaUtilizadaPercent],
+      ['Livre', this.memoriaLivrePorcentagem],
+      ['Ocupada', this.memoriaUtilizadaPorcentagem],
     ]);
 
     var options = {

@@ -9,17 +9,17 @@
             <button *ngFor="let disk of processos.drives; let i = index"
                     (click)="selectDrive(i)"
                     [ngClass]="{ 'selected': i === selectedDriveIndex }">
-              {{disk.driveName}}
+              {{disk.nome}}
             </button>
           </div>
 
           <ng-container *ngIf="selectedDriveIndex !== null">
             <h2 *ngIf="processos.drives && processos.drives.length > 1;"><strong>Informações do drive:</strong></h2>
-            <p><strong>Nome do drive:</strong> {{ processos.drives[selectedDriveIndex].driveName }}</p>
-            <p><strong>Tipo de drive:</strong> {{ getDriveTypeName(processos.drives[selectedDriveIndex].driveType) }}</p>
-            <p><strong>Tamanho total:</strong> {{ (processos.drives[selectedDriveIndex].totalSize / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
-            <p><strong>Espaço livre disponível:</strong> {{ (processos.drives[selectedDriveIndex].availableFreeSpace / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
-            <p><strong>Espaço utilizado:</strong> {{ (processos.drives[selectedDriveIndex].usedSpace / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
+            <p><strong>Nome do drive:</strong> {{ processos.drives[selectedDriveIndex].nome }}</p>
+            <p><strong>Tipo de drive:</strong> {{ getDriveTypeName(processos.drives[selectedDriveIndex].tipo) }}</p>
+            <p><strong>Tamanho total:</strong> {{ (processos.drives[selectedDriveIndex].tamanhoTotal / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
+            <p><strong>Espaço livre disponível:</strong> {{ (processos.drives[selectedDriveIndex].espacoDisponivel / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
+            <p><strong>Espaço utilizado:</strong> {{ (processos.drives[selectedDriveIndex].espacoUtilizado / 1024 / 1024 / 1024) | number: '1.2-2' }} GB</p>
           </ng-container>
 
         </div>
