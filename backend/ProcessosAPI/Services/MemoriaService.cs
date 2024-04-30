@@ -1,3 +1,4 @@
+using System;
 using System.Management;
 using ProcessosAPI.DTOS;
 
@@ -7,34 +8,39 @@ namespace ProcessosAPI.Services
     {
         public MemoryInfoDto ObterInformacoesMemoria()
         {
-            float totalMemory = 0f;
-            float availableMemory = 0f;
-            float usedMemory = 0f;
+            float memoriaTotal;
+            float memoriaDisponivel;
+            float memoriaUtilizada;
+            
+            ObterInformacoesMemoria(out memoriaTotal, out memoriaDisponivel, out memoriaUtilizada);
+
+            var memoria = new MemoryInfoDto
+            {
+                MemoriaUtilizada = memoriaUtilizada,
+                MemoriaDisponivel = memoriaDisponivel,
+                MemoriaTotal = memoriaTotal,
+            };
+
+            return memoria;
+        }
+
+        private void ObterInformacoesMemoria(out float memoriaTotal, out float memoriaDisponivel, out float memoriaUtilizada)
+        {
+            memoriaTotal = 0f;
+            memoriaDisponivel = 0f;
+            memoriaUtilizada = 0f;
 
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
             foreach (ManagementObject queryObj in searcher.Get())
             {
-                ulong totalPhysicalMemory = Convert.ToUInt64(queryObj["TotalVisibleMemorySize"]);
-                ulong freePhysicalMemory = Convert.ToUInt64(queryObj["FreePhysicalMemory"]);
-                ulong usedPhysicalMemory = totalPhysicalMemory - freePhysicalMemory;
+                ulong memoriaFisicaTotal = Convert.ToUInt64(queryObj["TotalVisibleMemorySize"]);
+                ulong memoriaFisicaLivre = Convert.ToUInt64(queryObj["FreePhysicalMemory"]);
 
-                float totalMemoryBytes = totalPhysicalMemory;
-                float availableMemoryBytes = freePhysicalMemory;
-                float usedMemoryBytes = usedPhysicalMemory;
+                memoriaTotal = memoriaFisicaTotal / (1024f * 1024f);
+                memoriaDisponivel = memoriaFisicaLivre / (1024f * 1024f);
+                memoriaUtilizada = (memoriaFisicaTotal - memoriaFisicaLivre) / (1024f * 1024f);
 
-                totalMemory = totalMemoryBytes / (1024f * 1024f);
-                availableMemory = availableMemoryBytes / (1024f * 1024f);
-                usedMemory = usedMemoryBytes / (1024f * 1024f);
             }
-
-            var memoria = new MemoryInfoDto
-            {
-                UsedMemoryGB = usedMemory,
-                AvailableMemoryGB = availableMemory,
-                TotalMemoryGB = totalMemory,
-            };
-
-            return memoria;
         }
     }
 }

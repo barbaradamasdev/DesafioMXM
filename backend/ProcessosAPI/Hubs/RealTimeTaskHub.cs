@@ -26,16 +26,16 @@ public class RealTimeTaskHub : Hub
             var memoria = _memoriaService.ObterInformacoesMemoria();
             var cpu = _CPUService.ObterInformacoesCPU();
 
-            cpuList.Add(cpu.PercentUsed);
+            cpuList.Add(cpu.PorcentagemUsadaDoCPU);
 
             var cpuComHistorico = new CPUInfoDto
             {
-                UserName = cpu.UserName,
-                MachineName = cpu.MachineName,
-                ProcessorCount = cpu.ProcessorCount,
-                PercentUsed = cpu.PercentUsed,
+                Nome = cpu.Nome,
+                NomeMaquina = cpu.NomeMaquina,
+                ContadorDeProcessadores = cpu.ContadorDeProcessadores,
+                PorcentagemUsadaDoCPU = cpu.PorcentagemUsadaDoCPU,
                 Drives = cpu.Drives,
-                CpuList = cpuList
+                ListaCPUemPorcentagem = cpuList
             };
 
             var processInfo = new

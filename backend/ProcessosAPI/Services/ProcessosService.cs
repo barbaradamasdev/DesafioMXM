@@ -8,18 +8,18 @@ namespace ProcessosAPI.Services
         public ProcessInfoDto[] ObterInformacoesProcessos()
 
         {
-            var processos = GetProcessesInfo().Select(p => new ProcessInfoDto
+            var processos = ObterInformacoesProcessosSistema().Select(p => new ProcessInfoDto
             {
                 Nome = p.ProcessName,
                 Id = p.Id,
-                MemoriaPagedKB = p.PagedMemorySize64 / 1024,
+                Memoria = p.PagedMemorySize64 / 1024,
                 Estado = p.Responding ? "Em execução" : "Não respondendo",
             }).ToList();
 
             return processos.ToArray();
         }
 
-        private Process[] GetProcessesInfo()
+        private Process[] ObterInformacoesProcessosSistema()
         {
             return Process.GetProcesses();
         }

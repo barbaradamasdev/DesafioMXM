@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Management;
 using ProcessosAPI.DTOS;
 
 namespace ProcessosAPI.Services
@@ -11,14 +7,35 @@ namespace ProcessosAPI.Services
     {
         public CPUInfoDto ObterInformacoesCPU()
         {
-            PerformanceCounter cpuCounter = new("Processor", "% Processor Time", "_Total");
-            Thread.Sleep(500);
-            float cpuUsage = cpuCounter.NextValue();
-            Thread.Sleep(500);
-            cpuUsage = cpuCounter.NextValue();
+            float usoCPU = ObterUsoCPU();
+            List<DriveInfoDto> drives = ObterInformacoesDrives();
 
+            var cpu = new CPUInfoDto
+            {
+                Nome = Environment.UserName,
+                NomeMaquina = Environment.MachineName,
+                ContadorDeProcessadores = Environment.ProcessorCount,
+                PorcentagemUsadaDoCPU = usoCPU,
+                Drives = drives,
+            };
+
+            return cpu;
+        }
+
+        private float ObterUsoCPU()
+        {
+            PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+            Thread.Sleep(500);
+            float usoCPU = cpuCounter.NextValue();
+            Thread.Sleep(500);
+            usoCPU = cpuCounter.NextValue();
+            return usoCPU;
+        }
+
+        private List<DriveInfoDto> ObterInformacoesDrives()
+        {
             DriveInfo[] allDrives = DriveInfo.GetDrives();
-            List<DriveInfoDto> driveInfoList = new List<DriveInfoDto>();
+            List<DriveInfoDto> drives = new List<DriveInfoDto>();
 
             foreach (DriveInfo drive in allDrives)
             {
@@ -26,26 +43,17 @@ namespace ProcessosAPI.Services
                 {
                     DriveInfoDto driveDto = new DriveInfoDto
                     {
-                        DriveName = drive.Name,
-                        DriveType = drive.DriveType,
-                        TotalSize = drive.TotalSize,
-                        AvailableFreeSpace = drive.AvailableFreeSpace
+                        Nome = drive.Name,
+                        Tipo = drive.DriveType,
+                        TamanhoTotal = drive.TotalSize,
+                        EspacoDisponivel = drive.AvailableFreeSpace
                     };
 
-                    driveInfoList.Add(driveDto);
+                    drives.Add(driveDto);
                 }
             }
 
-            var cpu = new CPUInfoDto
-            {
-                UserName = Environment.UserName,
-                MachineName = Environment.MachineName,
-                ProcessorCount = Environment.ProcessorCount,
-                PercentUsed = cpuUsage,
-                Drives = driveInfoList,
-            };
-
-            return cpu;
+            return drives;
         }
     }
 }
