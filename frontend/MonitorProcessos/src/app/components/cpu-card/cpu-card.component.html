@@ -4,10 +4,10 @@
 
     <div>
       <ng-container *ngIf="processos; else noDrives">
-        <p><strong>Nome do usuário:</strong>  {{ processos.userName }}</p>
-        <p><strong>Nome da máquina:</strong>  {{ processos.machineName }}</p>
-        <p><strong>Número de processadores:</strong>  {{ processos.processorCount }}</p>
-        <p><strong>Uso de CPU (%):</strong>  {{ processos.percentUsed | number:'1.2-2'  }}%</p>
+        <p><strong>Nome do usuário:</strong>  {{ processos.nome }}</p>
+        <p><strong>Nome da máquina:</strong>  {{ processos.nomeMaquina }}</p>
+        <p><strong>Número de processadores:</strong>  {{ processos.contadorDeProcessadores }}</p>
+        <p><strong>Uso de CPU (%):</strong>  {{ processos.porcentagemUsadaDoCPU | number:'1.2-2'  }}%</p>
       </ng-container>
     </div>
 

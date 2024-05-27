@@ -4,10 +4,10 @@
 
       <div  *ngIf="processos; else noDrives">
         <ng-container *ngIf="processos">
-          <p><strong>Memória em uso (GB):</strong> {{ processos.usedMemoryGB | number:'1.2-2' }} GB</p>
-          <p><strong>Memória livre (GB):</strong> {{ processos.availableMemoryGB | number:'1.2-2' }} GB</p>
-          <p><strong>Memória total (GB):</strong> {{ processos.totalMemoryGB | number:'1.2-2' }} GB</p>
-          <p><strong>Uso de memória (%):</strong> {{ (processos.usedMemoryGB / processos.totalMemoryGB * 100) | number:'1.2-2' }}%</p>
+          <p><strong>Memória em uso (GB):</strong> {{ processos.memoriaUtilizada | number:'1.2-2' }} GB</p>
+          <p><strong>Memória livre (GB):</strong> {{ processos.memoriaDisponivel | number:'1.2-2' }} GB</p>
+          <p><strong>Memória total (GB):</strong> {{ processos.memoriaTotal | number:'1.2-2' }} GB</p>
+          <p><strong>Uso de memória (%):</strong> {{ (processos.memoriaUtilizada / processos.memoriaTotal * 100) | number:'1.2-2' }}%</p>
         </ng-container>
       </div>
 
